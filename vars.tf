@@ -1,21 +1,24 @@
 variable "desired_capacity" {
   type        = "string"
+  default     = "1"
   description = "ASG desired capacity"
 }
 
 variable "min_size" {
   type        = "string"
-  default     = 1
+  default     = "1"
   description = "ASG min size"
 }
 
 variable "max_size" {
   type        = "string"
+  default     = "2"
   description = "ASG max size"
 }
 
 variable "key_name" {
   type        = "string"
+  default     = "windows"
   description = "Key pair name"
 }
 
@@ -39,6 +42,7 @@ variable "az2" {
 
 variable "instance_type" {
   type        = "string"
+  default     = "m4.large"
   description = "AWS instance type"
 }
 

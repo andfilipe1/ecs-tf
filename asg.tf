@@ -6,13 +6,12 @@ resource "aws_launch_configuration" "default" {
   security_groups             = ["${aws_security_group.default.id}"]
   iam_instance_profile        = "${aws_iam_instance_profile.default.id}"
 
- user_data = 
+ user_data =
  <<EOF
 <powershell>
 Import-Module ECSTools
 Initialize-ECSAgent -Cluster '${aws_ecs_cluster.default.name}' -EnableTaskIAMRole
-</powershell>\n
-<persist>true</persist>
+</powershell>
 EOF
 }
 
@@ -23,3 +22,5 @@ resource "aws_autoscaling_group" "default" {
   min_size             = "${var.min_size}"
   desired_capacity     = "${var.desired_capacity}"
 }
+
+

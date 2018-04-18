@@ -21,9 +21,15 @@ resource "aws_ecs_task_definition" "default" {
     "essential": true,
     "image": "microsoft/iis",
     "memory": 500,
-    "portMappings" : [{"ContainerPort": 80}],
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": 80,
+          "hostPort": 8080
+        }
+      ],
     "entryPoint": ["powershell"],
-    "command": ["New-Item -Path C:\\inetpub\\wwwroot\\index.html -Type file -Value '<html><head><title>Hello world!</title><body>You see me? Nice!'; C:\\ServiceMonitor.exe w3svc"],
+    "command":["New-Item -Path C:\\inetpub\\wwwroot\\index.html -Type file -Value '<html> <head> <title>Amazon ECS Sample App</title> <style>body {margin-top: 40px; background-color: #333;} </style> </head><body> <div style=color:white;text-align:center> <h1>Amazon ECS Sample App</h1> <h2>Congratulations!</h2> <p>Your application is now running on a container in Amazon ECS.</p>'; C:\\ServiceMonitor.exe w3svc"],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
